@@ -13,6 +13,34 @@ namespace Core.DataAccess.EntityFramework
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
+        public void Add(TEntity entity)
+        {
+            using (var context=new TContext())
+            {
+                var added = context.Entry(entity);
+                added.State = EntityState.Added;
+                context.SaveChanges();
+            }
+        }
+
+        public void Delete(TEntity entity)
+        {
+            using (var context=new TContext())
+            {
+                var deleted = context.Entry(entity);
+                deleted.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+
+        public TEntity GetById(Expression<Func<TEntity, bool>> filter)
+        {
+            using (var context = new TContext())
+            {
+                return context.Set<TEntity>().SingleOrDefault(filter);
+            }
+        }
+
         public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebServer.Helper;
 using WebServer.Models;
@@ -26,6 +27,44 @@ namespace WebServer.Controllers
                 products = JsonConvert.DeserializeObject<List<ProductData>>(results);
             }
             return View(products);
+        }
+        public async Task<IActionResult> Details(int Id)
+        {
+            var product = new ProductData();
+            HttpClient client = _api.Initial();
+            HttpResponseMessage res = await client.GetAsync($"api/products/{Id}");
+            if (res.IsSuccessStatusCode)
+            {
+                var results = res.Content.ReadAsStringAsync().Result;
+                product = JsonConvert.DeserializeObject<ProductData>(results);
+            }
+            return View(product);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(ProductData product)
+        {
+            HttpClient client = _api.Initial();
+            var postTask = client.PostAsJsonAsync<ProductData>("api/products/add", product);
+            postTask.Wait();
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var product = new ProductData();
+            HttpClient client = _api.Initial();
+            HttpResponseMessage res = await client.DeleteAsync($"api/products/delete/{Id}");
+            return RedirectToAction("Index");
         }
     }
 }

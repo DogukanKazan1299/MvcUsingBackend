@@ -114,3 +114,5 @@ C:\Users\dkzn1\source\repos\MvcUsingBackend\WebServer\bin\Debug\net5.0\zh-Hans\M
 C:\Users\dkzn1\source\repos\MvcUsingBackend\WebServer\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\dkzn1\source\repos\MvcUsingBackend\WebServer\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\dkzn1\source\repos\MvcUsingBackend\WebServer\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+C:\Users\dkzn1\source\repos\MvcUsingBackend\WebServer\obj\Debug\net5.0\Razor\Views\Home\Details.cshtml.g.cs
+C:\Users\dkzn1\source\repos\MvcUsingBackend\WebServer\obj\Debug\net5.0\Razor\Views\Home\Create.cshtml.g.cs
